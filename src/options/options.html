@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ToS Risk Analyzer - Ayarlar</title>
+  <link rel="stylesheet" href="options.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="options-container">
+    <!-- Başlık -->
+    <header class="options-header">
+      <div class="options-logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <div>
+        <h1>ToS Risk Analyzer Ayarları</h1>
+        <p>LLM API bağlantınızı ve model tercihlerinizi yapılandırın.</p>
+      </div>
+    </header>
+
+    <!-- API Ayarları -->
+    <section class="options-section">
+      <h2 class="section-heading">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        API Yapılandırması
+      </h2>
+
+      <div class="form-group">
+        <label for="provider">LLM Sağlayıcısı</label>
+        <select id="provider">
+          <option value="local">🧠 Yerel Analiz Motoru (API Anahtarı Gerektirmez)</option>
+          <option value="openai">OpenAI (GPT-4o)</option>
+          <option value="anthropic">Anthropic (Claude)</option>
+          <option value="gemini">Google Gemini</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="apiKey">API Anahtarı</label>
+        <div class="input-with-toggle">
+          <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off" />
+          <button class="toggle-visibility" id="toggleApiKey" title="Göster/Gizle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+        <span class="form-hint">API anahtarınız yalnızca cihazınızda (chrome.storage.local) saklanır ve asla sunucuya gönderilmez.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="modelName">Model</label>
+        <select id="modelName">
+          <!-- JavaScript ile doldurulacak -->
+        </select>
+      </div>
+    </section>
+
+    <!-- Gelişmiş Ayarlar -->
+    <section class="options-section">
+      <h2 class="section-heading">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="4" y1="21" x2="4" y2="14"></line>
+          <line x1="4" y1="10" x2="4" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12" y2="3"></line>
+          <line x1="20" y1="21" x2="20" y2="16"></line>
+          <line x1="20" y1="12" x2="20" y2="3"></line>
+          <line x1="1" y1="14" x2="7" y2="14"></line>
+          <line x1="9" y1="8" x2="15" y2="8"></line>
+          <line x1="17" y1="16" x2="23" y2="16"></line>
+        </svg>
+        Gelişmiş Ayarlar
+      </h2>
+
+      <div class="form-group">
+        <label for="maxTokens">Maks Token Sayısı</label>
+        <input type="number" id="maxTokens" value="4096" min="512" max="16384" step="256" />
+        <span class="form-hint">LLM yanıtı için maksimum token sayısı. Daha yüksek değerler daha detaylı raporlar üretir.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="temperature">Sıcaklık (Temperature): <span id="tempValue">0.1</span></label>
+        <input type="range" id="temperature" min="0" max="1" step="0.05" value="0.1" />
+        <span class="form-hint">Düşük değerler (0.0-0.2) daha deterministik ve tutarlı sonuçlar verir. Risk analizi için düşük sıcaklık önerilir.</span>
+      </div>
+    </section>
+
+    <!-- İşlem Butonları -->
+    <div class="options-actions">
+      <button class="save-btn" id="saveBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+          <polyline points="17 21 17 13 7 13 7 21"></polyline>
+          <polyline points="7 3 7 8 15 8"></polyline>
+        </svg>
+        Kaydet
+      </button>
+      <button class="clear-btn" id="clearBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+        Tüm Verileri Temizle
+      </button>
+    </div>
+
+    <!-- Durum mesajı -->
+    <div class="status-message hidden" id="statusMessage"></div>
+  </div>
+
+  <script type="module" src="options.ts"></script>
+</body>
+</html>
